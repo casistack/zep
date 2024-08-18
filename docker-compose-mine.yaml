@@ -52,7 +52,7 @@ services:
         condition: service_healthy
     ports:
       - ":8000"
-    #volumes:
+    volumes:
       - zep_config:/app/config      
     environment:
       - ZEP_STORE_POSTGRES_DSN=postgres://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@db:5432/${POSTGRES_DB:-postgres}?sslmode=disable
