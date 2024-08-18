@@ -19,8 +19,8 @@ services:
     healthcheck:
       test: ["CMD", "pg_isready", "-q", "-d", "${POSTGRES_DB:-postgres}", "-U", "${POSTGRES_USER:-postgres}"]
       interval: 5s
-      timeout: 5s
-      retries: 5
+      timeout: 15s
+      retries: 3
     ports:
       - ":5432"
 
