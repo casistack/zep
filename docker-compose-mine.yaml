@@ -51,9 +51,9 @@ services:
       nlp:
         condition: service_healthy
     ports:
-      - ":8000"
-    volumes:
-      - zep_config:/app/config      
+      - "8555:8000"
+    #volumes:
+      #- zep_config:/app/config      
     environment:
       - ZEP_STORE_POSTGRES_DSN=postgres://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@db:5432/${POSTGRES_DB:-postgres}?sslmode=disable
       - ZEP_NLP_SERVER_URL=http://nlp:${ZEP_NLP_SERVER_PORT:-5557}
