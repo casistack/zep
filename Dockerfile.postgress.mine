@@ -52,7 +52,7 @@ RUN sed -i 's#hba_conf=.*#hba_conf=/var/lib/postgresql/data/pg_hba.conf#' /etc/w
 RUN sed -i 's/ipv6=1/ipv6=0/' /etc/webmin/miniserv.conf
 
 # Add referers to /etc/webmin/config
-RUN echo "referers=hoodzep.cybroxnest.com" >> /etc/webmin/config
+RUN echo "referers=hoodzepdb.cybroxnest.com" >> /etc/webmin/config
 
 
 # Clean up build dependencies and temporary files
