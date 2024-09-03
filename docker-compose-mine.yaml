@@ -2,7 +2,7 @@ services:
   db:
     build:
       context: .
-      dockerfile: Dockerfile.postgres
+      dockerfile: Dockerfile.postgress.mine
       args:
         - PGVECTOR_VERSION=${PGVECTOR_VERSION:-0.5.1}
     image: ${POSTGRES_IMAGE:-ghcr.io/getzep/postgres}:${POSTGRES_TAG:-latest}
@@ -57,8 +57,8 @@ services:
       context: .
       dockerfile: Dockerfile-mine
     environment:
-      - ZEP_STORE_POSTGRES_DSN=postgres://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@db:5432/${POSTGRES_DB:-postgres}?sslmode=disable
-      - ZEP_NLP_SERVER_URL=http://nlp:${ZEP_NLP_SERVER_PORT:-5557}
+      - 'ZEP_STORE_POSTGRES_DSN=postgres://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@db:5432/${POSTGRES_DB:-postgres}?sslmode=disable'
+      - 'ZEP_NLP_SERVER_URL=http://nlp:${ZEP_NLP_SERVER_PORT:-5557}'
       - ZEP_OPENAI_API_KEY=${ZEP_OPENAI_API_KEY}
       - ZEP_AUTH_REQUIRED=${ZEP_AUTH_REQUIRED:-false}
       - ZEP_AUTH_SECRET=${ZEP_AUTH_SECRET}
