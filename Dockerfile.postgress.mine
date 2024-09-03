@@ -19,6 +19,7 @@ RUN apt-get update && \
         iproute2 \
         perl \
         libdbi-perl \
+        sudo \
         libdbd-pg-perl
 
 # Install Perl modules
