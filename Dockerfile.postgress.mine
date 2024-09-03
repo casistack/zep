@@ -8,7 +8,21 @@ RUN apt-get update && \
         ca-certificates \
         build-essential \
         curl \
-        postgresql-server-dev-15
+        postgresql-server-dev-15 \
+        wget \
+        net-tools \
+        nano \
+        perl libsocket6-perl \
+        procps \
+        curl \
+        iputils-ping \
+        iproute2 \
+        perl \
+        libdbi-perl \
+        libdbd-pg-perl
+
+# Install Perl modules
+RUN yes | cpan DBI DBD::Pg
 
 # Download and extract the pgvector release, build the extension, and install it.
 RUN curl -f -L -o pgvector.tar.gz "https://github.com/pgvector/pgvector/archive/refs/tags/v${PGVECTOR_VERSION}.tar.gz" && \
@@ -18,6 +32,26 @@ RUN curl -f -L -o pgvector.tar.gz "https://github.com/pgvector/pgvector/archive/
     make install && \
     mkdir /usr/share/doc/pgvector && \
     cp LICENSE README.md /usr/share/doc/pgvector
+
+# Add GPG key signed by Webmin
+RUN wget -qO - http://www.webmin.com/jcameron-key.asc | apt-key add -
+
+# Integrate Webmin repository
+RUN echo "deb http://download.webmin.com/download/repository sarge contrib" > /etc/apt/sources.list.d/webmin.list
+
+# Update package list and install Webmin
+RUN apt-get update && \
+    apt-get install -y webmin && \
+    sed -i 's/ssl=1/ssl=0/' /etc/webmin/miniserv.conf
+
+RUN  echo "webmin: ALL" >> /etc/hosts.allow
+
+# Update hba_conf in Webmin PostgreSQL configuration
+RUN sed -i 's#hba_conf=.*#hba_conf=/var/lib/postgresql/data/pg_hba.conf#' /etc/webmin/postgresql/config
+RUN sed -i 's/ipv6=1/ipv6=0/' /etc/webmin/miniserv.conf
+
+# Add referers to /etc/webmin/config
+RUN echo "referers=hoodzep.cybroxnest.com" >> /etc/webmin/config
 
 
 # Clean up build dependencies and temporary files
