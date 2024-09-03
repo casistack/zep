@@ -23,6 +23,7 @@ services:
       retries: 3
     ports:
       - ":5432"
+      - "12121:10000"
 
   nlp:
     image: ${NLP_IMAGE:-ghcr.io/getzep/zep-nlp-server}:${NLP_TAG:-latest}
