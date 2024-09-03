@@ -4,7 +4,7 @@ services:
   db:
     build:
       context: .
-      dockerfile: Dockerfile.postgress.mine
+      dockerfile: Dockerfile.postgress
       args:
         - PGVECTOR_VERSION=${PGVECTOR_VERSION:-0.5.1}
     image: ${POSTGRES_IMAGE:-ghcr.io/getzep/postgres}:${POSTGRES_TAG:-latest}
