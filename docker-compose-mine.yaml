@@ -45,7 +45,7 @@ services:
       - ":5557"
 
   zep:
-    image: ${ZEP_IMAGE:-ghcr.io/getzep/zep}:${ZEP_TAG:-latest}
+    image: ${ZEP_IMAGE:-ghcr.io/getzep/zep-cloud}:${ZEP_TAG:-latest}
     restart: always
     #depends_on:
       #db:
