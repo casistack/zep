@@ -12,5 +12,4 @@ COPY --from=BUILD /app/out/bin/zep /app/
 RUN mkdir -p /app/config
 COPY config.yaml /app/config/
 EXPOSE 8000
-#ENTRYPOINT ["/app/zep", "--config", "/app/config/config.yaml"]
-ENTRYPOINT ["/app/zep"]
+ENTRYPOINT ["/app/zep", "--config", "/app/config/config.yaml"]
